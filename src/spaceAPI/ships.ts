@@ -20,6 +20,8 @@ export async function getShips(useCache: boolean = true) {
 		const body: {data: ShipType[]} = await response.json();
         const data = body.data;
 
+        shipsCache = data;
+
         if (!data) {
             throw "Error from spacetraders API looking for ships"
         }
@@ -48,6 +50,8 @@ type Route = {
         x: number,
         y: number;
     },
+    departureTime: string
+    arrival: string
 };
 
 type Crew = {

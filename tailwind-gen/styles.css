@@ -547,6 +547,10 @@ video {
   margin-bottom: 1rem;
 }
 
+.mr-10 {
+  margin-right: 2.5rem;
+}
+
 .mr-8 {
   margin-right: 2rem;
 }
@@ -608,10 +612,6 @@ video {
 
 .gap-6 {
   gap: 1.5rem;
-}
-
-.gap-8 {
-  gap: 2rem;
 }
 
 .rounded {
@@ -760,4 +760,8 @@ video {
 .shadow-emerald-900 {
   --tw-shadow-color: #064e3b;
   --tw-shadow: var(--tw-shadow-colored);
+}
+
+.mr-10 {
+  margin-right: 2.5rem;
 }

@@ -1,20 +1,29 @@
 import * as elements from "typed-html";
 import { ShipType } from "./spaceAPI/ships";
 
-export type Menu = "registration" | "nav" | "tech" | "cargo"
+export type Menu = "registration" | "nav" | "tech" | "cargo";
 
 type ShipProps = {
     ship: ShipType;
     menu: Menu;
-}
+};
 
 const registrationLabels = ["NAME", "ROLE", "LOCATION"];
-const navLabels = ["WAYPOINT", "STATUS", "FLIGHT-MODE"]
+const navLabels = ["WAYPOINT", "STATUS", "FLIGHT-MODE", "DEPARTURE-TIME", "ARRIVAL"];
+const destinationLabels = ["SYMBOL", "TYPE", "X", "Y"];
+const departureLabels = ["SYMBOL", "TYPE", "X", "Y"];
+
+
+function dateStringToLocale(dateString: string) {
+    const newDate = new Date(dateString)
+    return newDate.toLocaleString()
+}
 
 export function Ship({ ship, menu }: ShipProps) {
 
+
     return (
-        <div id={ship.symbol} class="flex flex-col justify-between border border-emerald-500 rounded bg-slate-800 text-emerald-100 p-6 shadow-md shadow-emerald-900">
+        <div id={ship.symbol} class="w-fit flex flex-col justify-between border border-emerald-500 rounded bg-slate-800 text-emerald-100 p-6 shadow-md shadow-emerald-900">
             {(menu === "registration" || null) && (
                 <div>
                     <section>
@@ -22,7 +31,7 @@ export function Ship({ ship, menu }: ShipProps) {
                         <div class="flex">
                             <ul class="font-semibold text-lg gap-2 mr-8">
                                 {registrationLabels.map((label) =>
-                                    <li>{label.toUpperCase()}</li>
+                                    <li>{label}</li>
                                 )}
                             </ul>
                             <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
@@ -35,31 +44,56 @@ export function Ship({ ship, menu }: ShipProps) {
                 </div>
             )}
             {(menu === "nav" || null) && (
-                <div class="flex gap-8">
-                    <section>
-
+                <div class="flex">
+                    <section class="mr-10">
                         <h3 class="font-bold text-2xl text-amber-400 mb-4">NAVIGATION</h3>
                         <div class="flex">
                             <ul class="font-semibold text-lg gap-2 mr-8">
                                 {navLabels.map((label) =>
-                                    <li>{label.toUpperCase()}</li>
+                                    <li>{label}</li>
                                 )}
                             </ul>
                             <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
                                 <li>{ship.nav.waypointSymbol}</li>
                                 <li>{ship.nav.status}</li>
                                 <li>{ship.nav.flightMode}</li>
+                                <li>{dateStringToLocale(ship.nav.route.departureTime)}</li>
+                                <li>{dateStringToLocale(ship.nav.route.arrival)}</li>
                             </ul>
                         </div>
                     </section>
-                    <section>
-
-                        <h3 class="font-bold text-2xl text-amber-400 mb-4">ROUTE</h3>
-                        <div>
-
+                    <section class="mr-10">
+                        <h3 class="font-bold text-2xl text-amber-400 mb-4">DESTINATION</h3>
+                        <div class="flex">
+                            <ul class="font-semibold text-lg gap-2 mr-8">
+                                {destinationLabels.map((label) =>
+                                    <li>{label}</li>
+                                )}
+                            </ul>
+                            <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
+                                <li>{ship.nav.route.destination.symbol}</li>
+                                <li>{ship.nav.route.destination.type}</li>
+                                <li>{ship.nav.route.destination.x}</li>
+                                <li>{ship.nav.route.destination.y}</li>
+                            </ul>
                         </div>
                     </section>
-                    
+                    <section class="mr-10">
+                        <h3 class="font-bold text-2xl text-amber-400 mb-4">DEPARTURE</h3>
+                        <div class="flex">
+                            <ul class="font-semibold text-lg gap-2 mr-8">
+                                {departureLabels.map((label) =>
+                                    <li>{label}</li>
+                                )}
+                            </ul>
+                            <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
+                                <li>{ship.nav.route.departure.symbol}</li>
+                                <li>{ship.nav.route.departure.type}</li>
+                                <li>{ship.nav.route.departure.x}</li>
+                                <li>{ship.nav.route.departure.y}</li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
             )}
 

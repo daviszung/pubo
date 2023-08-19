@@ -14,7 +14,6 @@ export const shipEndpoints = {
 
             for (let i = 0; i < ships.length; i++) {
                 if (ships[i].symbol === shipSymbol) {
-                    console.log("found ship to change menu");
                     return <Ship ship={ships[i]} menu={menu}/>
                 }
             }
