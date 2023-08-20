@@ -572,6 +572,14 @@ video {
   width: fit-content;
 }
 
+.min-w-\[\] {
+  min-width: ;
+}
+
+.min-w-\[50\%\] {
+  min-width: 50%;
+}
+
 .scale-125 {
   --tw-scale-x: 1.25;
   --tw-scale-y: 1.25;
@@ -760,8 +768,4 @@ video {
 .shadow-emerald-900 {
   --tw-shadow-color: #064e3b;
   --tw-shadow: var(--tw-shadow-colored);
-}
-
-.mr-10 {
-  margin-right: 2.5rem;
 }

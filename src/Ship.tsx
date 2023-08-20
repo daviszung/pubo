@@ -1,5 +1,6 @@
 import * as elements from "typed-html";
 import { ShipType } from "./spaceAPI/ships";
+import { DataList } from "./DataList";
 
 export type Menu = "registration" | "nav" | "tech" | "cargo";
 
@@ -48,52 +49,15 @@ export function Ship({ ship, menu }: ShipProps) {
             <div class="flex">
                 <section class="mr-10">
                     <h3 class="font-bold text-2xl text-amber-400 mb-4">NAVIGATION</h3>
-                    <div class="flex">
-                        <ul class="font-semibold text-lg gap-2 mr-8">
-                            {navLabels.map((label) =>
-                                <li>{label}</li>
-                            )}
-                        </ul>
-                        <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
-                            <li>{ship.nav.waypointSymbol}</li>
-                            <li>{ship.nav.status}</li>
-                            <li>{ship.nav.flightMode}</li>
-                            <li>{dateStringToLocale(ship.nav.route.departureTime)}</li>
-                            <li>{dateStringToLocale(ship.nav.route.arrival)}</li>
-                        </ul>
-                    </div>
+                    <DataList labels={navLabels} data={[ship.nav.waypointSymbol, ship.nav.status, ship.nav.flightMode, dateStringToLocale(ship.nav.route.departureTime), dateStringToLocale(ship.nav.route.arrival)]} />
                 </section>
                 <section class="mr-10">
                     <h3 class="font-bold text-2xl text-amber-400 mb-4">DESTINATION</h3>
-                    <div class="flex">
-                        <ul class="font-semibold text-lg gap-2 mr-8">
-                            {destinationLabels.map((label) =>
-                                <li>{label}</li>
-                            )}
-                        </ul>
-                        <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
-                            <li>{destination.symbol}</li>
-                            <li>{destination.type}</li>
-                            <li>{destination.x}</li>
-                            <li>{destination.y}</li>
-                        </ul>
-                    </div>
+                    <DataList labels={destinationLabels} data={[destination.symbol, destination.type, destination.x, destination.y]} />
                 </section>
                 <section class="mr-10">
                     <h3 class="font-bold text-2xl text-amber-400 mb-4">DEPARTURE</h3>
-                    <div class="flex">
-                        <ul class="font-semibold text-lg gap-2 mr-8">
-                            {departureLabels.map((label) =>
-                                <li>{label}</li>
-                            )}
-                        </ul>
-                        <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
-                            <li>{departure.symbol}</li>
-                            <li>{departure.type}</li>
-                            <li>{departure.x}</li>
-                            <li>{departure.y}</li>
-                        </ul>
-                    </div>
+                    <DataList labels={departureLabels} data={[departure.symbol, departure.type, departure.x, departure.y]} />
                 </section>
             </div>
         ),
@@ -107,7 +71,7 @@ export function Ship({ ship, menu }: ShipProps) {
 
 
     return (
-        <div id={ship.symbol} class="w-fit flex flex-col justify-between border border-emerald-500 rounded bg-slate-800 text-emerald-100 p-6 shadow-md shadow-emerald-900">
+        <div id={ship.symbol} class="min-w-[50%] w-fit flex flex-col justify-between border border-emerald-500 rounded bg-slate-800 text-emerald-100 p-6 shadow-md shadow-emerald-900">
             {menus[menu]}
             <div id="hotbar" class="mt-4 flex items-center gap-6">
                 <i hx-get={`/ships?symbol=${ship.symbol}&menu=registration`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "registration" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-rocket cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></i>
