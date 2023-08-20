@@ -1,6 +1,7 @@
 import * as elements from "typed-html";
 import { ShipType } from "./spaceAPI/ships";
 import { DataList } from "./DataList";
+import { shipEndpoints } from "./endpoints/ships";
 
 export type Menu = "registration" | "nav" | "tech" | "cargo";
 
@@ -13,6 +14,8 @@ const registrationLabels = ["NAME", "ROLE", "LOCATION"];
 const navLabels = ["WAYPOINT", "STATUS", "FLIGHT-MODE", "DEPARTURE-TIME", "ARRIVAL"];
 const destinationLabels = ["SYMBOL", "TYPE", "X", "Y"];
 const departureLabels = ["SYMBOL", "TYPE", "X", "Y"];
+const fuelLabels = ["FUEL", "CONSUMED", "TIME"];
+const inventoryLabels = ["SYMBOL", "NAME", "DESCRIPTION", "UNITS"]
 
 
 function dateStringToLocale(dateString: string) {
@@ -65,7 +68,49 @@ export function Ship({ ship, menu }: ShipProps) {
             <div>tech</div>
         ),
         cargo: (
-            <div>cargo</div>
+            <div>
+                <section>
+                    <h3 class="font-bold text-2xl text-amber-400 mb-4">FUEL</h3>
+                    <div class="flex">
+                        <ul class="font-semibold text-lg gap-2 mr-8">
+                            {fuelLabels.map((label) =>
+                                <li>{label}</li>
+                            )}
+                        </ul>
+                        <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
+                            <li>{ship.fuel.current} / {ship.fuel.capacity}</li>
+                            <li>{ship.fuel.consumed.amount}</li>
+                            <li>{dateStringToLocale(ship.fuel.consumed.timestamp)}</li>
+                        </ul>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="font-bold text-2xl text-amber-400 mt-4">INVENTORY</h3>
+                    <h4 class="font-semibold text-xl text-amber-400 mb-3">{ship.cargo.units} / {ship.cargo.capacity}</h4>
+                    <div class="grid gap-8">
+                        {ship.cargo.inventory.map((item) => (
+                            <div class="flex">
+                                <ul class="font-semibold text-lg gap-2 mr-8">
+                                    {inventoryLabels.map((label) =>
+                                        <li>{label}</li>
+                                    )}
+                                </ul>
+                                <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
+                                    <li>{item.symbol}</li>
+                                    <li>{item.name}</li>
+                                    <li class="break-words">{item.description}</li>
+                                    <li>{item.units}</li>
+                                </ul>
+                            </div>
+                        ))}
+                        <div class="flex">
+                            
+                            
+                        </div>
+                    </div>
+                    
+                </section>
+            </div>
         )
     };
 

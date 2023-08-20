@@ -142,10 +142,17 @@ type Registration = {
     role: string;
 }
 
+type Item = {
+    symbol: string
+    name: string
+    description: string
+    units: number
+}
+
 type Cargo = {
     capacity: number;
     units: number;
-    inventory: string[]
+    inventory: Item[]
 }
 
 export type ShipType = {
