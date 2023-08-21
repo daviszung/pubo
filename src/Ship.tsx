@@ -28,6 +28,15 @@ export function Ship({ ship, menu }: ShipProps) {
     const destination = ship.nav.route.destination;
     const departure = ship.nav.route.departure;
 
+    ship.cargo.inventory = [
+        {
+            symbol: 's',
+            name: 's',
+            description: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+            units: 900
+        }
+    ]
+
     const menus = {
         registration: (
             <div>
@@ -42,7 +51,7 @@ export function Ship({ ship, menu }: ShipProps) {
                         <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
                             <li>{ship.registration.name}</li>
                             <li>{ship.registration.role}</li>
-                            <li>{ship.nav.status} AT {ship.nav.waypointSymbol}</li>
+                            <li>{ship.nav.status} AT <div class="cursor-copy" onclick={`copyToClipboard("${ship.nav.systemSymbol}")`}>{ship.nav.waypointSymbol}</div></li>
                         </ul>
                     </div>
                 </section>
@@ -98,7 +107,9 @@ export function Ship({ ship, menu }: ShipProps) {
                                 <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
                                     <li>{item.symbol}</li>
                                     <li>{item.name}</li>
-                                    <li class="break-words">{item.description}</li>
+                                    <details>
+                                        {item.description}
+                                    </details>
                                     <li>{item.units}</li>
                                 </ul>
                             </div>

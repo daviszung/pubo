@@ -2,13 +2,15 @@ import * as elements from "typed-html";
 import { Elysia, t } from "elysia";
 import { html } from "@elysiajs/html";
 
+import fs from 'fs'
+
 import { App } from "./App";
 import { acceptContract } from "./spaceAPI/contracts";
 
 import { dashboardEndpoints } from "./endpoints/dashboard";
 import { shipEndpoints } from "./endpoints/ships";
-import { Menu } from "./Ship";
 
+const htmlScripts = fs.readFileSync("scripts.html").toString()
 
 const BaseHTML = ({ children }: elements.Children) => `
 <!DOCTYPE html>
@@ -22,16 +24,18 @@ const BaseHTML = ({ children }: elements.Children) => `
 	<link href="/styles.css" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<body>
 ${children}
+</body>
+${htmlScripts}
 `;
+
 
 const app = new Elysia()
 	.use(html())
 	.get("/", ({ html }) => html(
 		<BaseHTML>
-			<body>
-				<App></App>
-			</body>
+			<App></App>
 		</BaseHTML>
 	))
 	.get("/styles.css", () => Bun.file("./tailwind-gen/styles.css"))
