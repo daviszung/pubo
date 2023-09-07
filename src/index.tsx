@@ -64,6 +64,13 @@ const app = new Elysia()
 				id: t.String()
 			})
 		})
+	.get("/system", async ({ query }) => {
+		console.log("hi");
+		console.log(query);
+		console.log("you found the system endpoint", query.symbol);
+
+		return "lol"
+	})
 	.get("/*", () => "404")
 	.listen(3000);
 

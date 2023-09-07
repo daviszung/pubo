@@ -14,7 +14,7 @@ export function DataList({ labels, data }: DataListProps) {
                 <li>{label.toUpperCase()}</li>
                 )}
             </ul>
-            <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
+            <ul class="font-semibold text-lg gap-2 italic text-emerald-600 whitespace-nowrap">
                 {data.map((data, index) => 
                 <li>{data}</li>
                 )}

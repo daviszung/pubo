@@ -7,7 +7,7 @@ import { getAgentDetails } from "../spaceAPI/agent";
 import { getMyContracts } from "../spaceAPI/contracts";
 import { getShips } from "../spaceAPI/ships";
 
-import { Menu, Ship } from "../Ship";
+import { Ship } from "../Ship";
 
 export const dashboardEndpoints = {
     agent: async () => {
@@ -18,7 +18,7 @@ export const dashboardEndpoints = {
         }
         return (<div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="agent" />
-            <main class="px-32 py-10">
+            <main class="px-8 xl:px-32 py-10">
                 <DataList labels={["SYMBOL", "HQ", "CREDITS", "FACTION"]} data={[agent.symbol, agent.headquarters, agent.credits, agent.startingFaction]} />
             </main>
         </div>);
@@ -34,7 +34,7 @@ export const dashboardEndpoints = {
         return (
             <div class="min-h-screen bg-slate-900 text-white">
                 <Navbar current="contracts" />
-                <main class="px-32 py-10">
+                <main class="px-8 xl:px-32 py-10">
                     <div class="font-bold text-2xl text-amber-400 my-4">META DATA</div>
                     <DataList labels={["TOTAL", "PAGE", "LIMIT"]} data={[meta.total, meta.page, meta.limit]} />
                     <div class="font-bold text-2xl text-amber-400 my-4">CONTRACTS</div>
@@ -52,7 +52,7 @@ export const dashboardEndpoints = {
         return (
             <div class="min-h-screen bg-slate-900 text-white" >
                 <Navbar current="ships" />
-                <main class="px-32 py-10 flex flex-col gap-6">
+                <main class="px-8 xl:px-32 py-10 flex flex-col gap-6">
                     <div class="font-bold text-2xl text-amber-400">SHIPS</div>
                     {ships.map(ship => <Ship ship={ship} menu="registration"/>)}
                 </main>
@@ -62,7 +62,7 @@ export const dashboardEndpoints = {
     navigation: () => (
         <div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="navigation" />
-            <main class="px-32 py-10">
+            <main class="px-8 xl:px-32 py-10">
                 navigation
             </main>
         </div>
@@ -70,8 +70,10 @@ export const dashboardEndpoints = {
     system: () => (
         <div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="system" />
-            <main class="px-32 py-10">
-                system
+            <main class="px-8 xl:px-32 py-10">
+                <div class="fixed left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] w-fit flex items-center gap-2 font-semibold">
+                    <input name="symbol" type="text" placeholder="ENTER SYSTEM ID" hx-get="/system" hx-trigger="keypress[key=='Enter'] from:body" class="systemIDInput p-2 border-2 border-emerald-900 italic rounded bg-slate-900 text-emerald-100 outline-none" />
+                </div>
             </main>
         </div>
     ),
