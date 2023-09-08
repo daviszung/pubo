@@ -1,28 +1,25 @@
 import * as elements from "typed-html";
 
 export const systemEndpoints = {
-    getSystem: async (systemID: string) => {
-        try {
-            const ships = await getShips(true)
+    getWaypointsInSystem: async (systemID: string) => {
+	try {
+		const response = await fetch(
+			`https://api.spacetraders.io/v2/systems/${systemID}/waypoints`,
+			{
+				headers: {
+					"content-type": "application/json",
+					Authorization: "Bearer " + process.env.TOKEN,
+				},
+			}
+		);
 
-            if(!ships) {
-                throw("no ships found while getting ships")
-            }
+		const responseBody = await response.json();
+        console.log(responseBody);
 
-            for (let i = 0; i < ships.length; i++) {
-                if (ships[i].symbol === shipSymbol) {
-                    return <Ship ship={ships[i]} menu={menu}/>
-                }
-            }
-
-        } catch (err) {
-            console.log("error with change ship menu", err);
-        }
-        
-
-
-        return (
-            <div>500 server error</div>
-        );
-    },
+		return <div>work in progress</div>
+	} catch (err) {
+		console.log("error: ", err);
+		return 
+	}
+    }
 };

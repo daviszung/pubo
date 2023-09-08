@@ -9,6 +9,7 @@ import { acceptContract } from "./spaceAPI/contracts";
 
 import { dashboardEndpoints } from "./endpoints/dashboard";
 import { shipEndpoints } from "./endpoints/ships";
+import { systemEndpoints } from "./endpoints/system";
 
 const htmlScripts = fs.readFileSync("scripts.html").toString()
 
@@ -65,11 +66,11 @@ const app = new Elysia()
 			})
 		})
 	.get("/system", async ({ query }) => {
-		console.log("hi");
-		console.log(query);
-		console.log("you found the system endpoint", query.symbol);
-
-		return "lol"
+		return await systemEndpoints["getWaypointsInSystem"](query.symbol);
+	}, {
+		query: t.Object({
+			symbol: t.String()
+		})
 	})
 	.get("/*", () => "404")
 	.listen(3000);

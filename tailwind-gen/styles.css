@@ -660,15 +660,6 @@ video {
   white-space: nowrap;
 }
 
-.break-normal {
-  overflow-wrap: normal;
-  word-break: normal;
-}
-
-.break-words {
-  overflow-wrap: break-word;
-}
-
 .rounded {
   border-radius: 0.25rem;
 }
@@ -723,14 +714,14 @@ video {
   padding: 1.5rem;
 }
 
-.px-32 {
-  padding-left: 8rem;
-  padding-right: 8rem;
-}
-
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .py-10 {
@@ -746,11 +737,6 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .text-2xl {
@@ -833,13 +819,6 @@ video {
 
 @media (min-width: 1280px) {
   .xl\:px-32 {
-    padding-left: 8rem;
-    padding-right: 8rem;
-  }
-}
-
-@media (min-width: 1536px) {
-  .\32xl\:px-32 {
     padding-left: 8rem;
     padding-right: 8rem;
   }
