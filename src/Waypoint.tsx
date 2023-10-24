@@ -1,12 +1,21 @@
 import * as elements from "typed-html"
 
-const typeColors = {
-    "PLANET": "blue-500",
-    "GAS_GIANT": "rose-700",
-    "MOON": "slate-100",
-    "ORBITAL_STATION": "emerald-300",
-    "JUMP_GATE": "violet-400",
-    "ASTEROID_FIELD": "yellow-800"
+const shadowColors = {
+    "PLANET": "shadow-blue-500",
+    "GAS_GIANT": "shadow-rose-700",
+    "MOON": "shadow-slate-100",
+    "ORBITAL_STATION": "shadow-emerald-300",
+    "JUMP_GATE": "shadow-violet-400",
+    "ASTEROID_FIELD": "shadow-yellow-800"
+} as const
+
+const textColors = {
+    "PLANET": "text-blue-500",
+    "GAS_GIANT": "text-rose-700",
+    "MOON": "text-slate-100",
+    "ORBITAL_STATION": "text-emerald-300",
+    "JUMP_GATE": "text-violet-400",
+    "ASTEROID_FIELD": "text-yellow-800"
 } as const
 
 
@@ -24,7 +33,7 @@ type Chart = {
 
 export type WaypointType = {
     symbol: string
-    type: keyof typeof typeColors
+    type: keyof typeof shadowColors
     systemSymbol: string
     x: number
     y: number
@@ -39,7 +48,7 @@ export type WaypointType = {
 export function Waypoint({waypoint}: {waypoint: WaypointType}) {
 
     return (
-        <div class={`shadow-${typeColors[waypoint.type]} flex items-center rounded bg-slate-800 text-emerald-100 p-6 shadow`}>
+        <article class={`${shadowColors[waypoint.type]} flex items-center rounded bg-slate-800 text-emerald-100 p-6 shadow`}>
             <div class="flex">
                 <ul class="font-semibold text-lg gap-2 mr-8">
                     <li>SYMBOL</li>
@@ -48,7 +57,7 @@ export function Waypoint({waypoint}: {waypoint: WaypointType}) {
                 </ul>
                 <ul class="font-semibold text-lg gap-2 italic text-emerald-600">
                     <li>{waypoint.symbol}</li>
-                    <li class={`text-${typeColors[waypoint.type]}`}>{waypoint.type}</li>
+                    <li class={`${textColors[waypoint.type]}`}>{waypoint.type}</li>
                     {waypoint.traits.map((trait, index) => {
                         if (trait.symbol === "MARKETPLACE") {
                             return (
@@ -56,7 +65,7 @@ export function Waypoint({waypoint}: {waypoint: WaypointType}) {
                             )
                         } else if (trait.symbol === "SHIPYARD") {
                             return (
-                                <li class=" cursor-pointer text-sky-500">SHIPYARD</li>
+                                <li hx-get={`/shipyard?system=${waypoint.systemSymbol}&waypoint=${waypoint.symbol}`} class=" cursor-pointer text-sky-500">SHIPYARD</li>
                             )
                         }
                         return (
@@ -66,7 +75,7 @@ export function Waypoint({waypoint}: {waypoint: WaypointType}) {
                 </ul>
             </div>
 
-        </div>
+        </article>
         
     );
 };

@@ -70,6 +70,8 @@ export async function acceptContract(contractID: string) {
 
 		const responseBody = await response.json();
 
+		contractsCache = null
+
 		console.log(responseBody);
 		return responseBody;
 		

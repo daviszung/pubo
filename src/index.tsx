@@ -10,6 +10,7 @@ import { acceptContract } from "./spaceAPI/contracts";
 import { dashboardEndpoints } from "./endpoints/dashboard";
 import { shipEndpoints } from "./endpoints/ships";
 import { systemEndpoints } from "./endpoints/system";
+import { string } from "zod";
 
 const htmlScripts = fs.readFileSync("scripts.html").toString()
 
@@ -47,7 +48,6 @@ const app = new Elysia()
 		.get("/navigation", dashboardEndpoints["navigation"])
 		.get("/system", dashboardEndpoints["system"])
 	)
-
 	.get("/ships", async ({ query }) => {
 		return await shipEndpoints["changeMenu"](query.symbol, query.menu);
 	}, {
@@ -59,17 +59,25 @@ const app = new Elysia()
 	.post("/contracts/accept/:id", async ({ params }) => {
 		const status = await acceptContract(params.id);
 		return;
-	},
-		{
-			params: t.Object({
-				id: t.String()
-			})
+	}, {
+		params: t.Object({
+			id: t.String()
 		})
+	})
 	.get("/system", async ({ query }) => {
 		return await systemEndpoints["getWaypointsInSystem"](query.symbol);
 	}, {
 		query: t.Object({
 			symbol: t.String()
+		})
+	})
+	.get("/shipyard", async ({ query }) => {
+		console.log("here", query);
+		return await systemEndpoints["getShipyard"](query.system, query.waypoint)
+	}, {
+		query: t.Object({
+			system: t.String(),
+			waypoint: t.String()
 		})
 	})
 	.get("/*", () => "404")
