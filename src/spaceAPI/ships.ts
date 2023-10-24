@@ -54,7 +54,7 @@ type Route = {
     arrival: string
 };
 
-type Crew = {
+export type Crew = {
     current: number,
     capacity: number,
     required: number,
@@ -73,7 +73,7 @@ type Fuel = {
 };
 
 
-type Frame = {
+export type Frame = {
     symbol: string,
     name: string,
     description: string,
@@ -88,7 +88,7 @@ type Frame = {
 };
 
 
-type Reactor = {
+export type Reactor = {
     symbol: string,
     name: string,
     description: string,
@@ -100,7 +100,7 @@ type Reactor = {
 };
 
 
-type Engine = {
+export type Engine = {
     symbol: string,
     name: string,
     description: string,
@@ -112,7 +112,7 @@ type Engine = {
     };
 };
 
-type Module = {
+export type Module = {
     symbol: string,
     name: string,
     description: string,
@@ -124,7 +124,7 @@ type Module = {
     };
 };
 
-type Mount = {
+export type Mount = {
     symbol: string,
     name: string,
     description: string,

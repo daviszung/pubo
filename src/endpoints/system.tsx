@@ -36,8 +36,9 @@ export const systemEndpoints = {
 			);
 
 			const responseBody = await response.json();
+			console.log(responseBody);
 
-			return <Shipyard data={responseBody}/>
+			return <Shipyard data={responseBody.data}/>
 		} catch (err) {
 			console.log("error: ", err);
 			return;

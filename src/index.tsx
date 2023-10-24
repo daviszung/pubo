@@ -70,7 +70,6 @@ const app = new Elysia()
 		})
 	})
 	.get("/shipyard", async ({ query }) => {
-		console.log("here", query);
 		return await systemEndpoints["getShipyard"](query.system, query.waypoint)
 	}, {
 		query: t.Object({
