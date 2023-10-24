@@ -70,9 +70,9 @@ export const dashboardEndpoints = {
     system: () => (
         <div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="system" />
-            <main class="px-8 xl:px-32 py-10">
+            <main id="systemMain" class="px-8 xl:px-32 py-10">
                 <div class="fixed left-[50%] top-[50%] -translate-x-[50%] -translate-y-[50%] w-fit flex items-center gap-2 font-semibold">
-                    <input name="symbol" type="text" placeholder="ENTER SYSTEM ID" hx-get="/system" hx-trigger="keypress[key=='Enter'] from:body" class="systemIDInput p-2 border-2 border-emerald-900 italic rounded bg-slate-900 text-emerald-100 outline-none" />
+                    <input name="symbol" type="text" placeholder="ENTER SYSTEM ID" hx-get="/system" hx-trigger="keypress[key=='Enter'] from:body" hx-target="#systemMain" class="systemIDInput p-2 border-2 border-emerald-900 italic rounded bg-slate-900 text-emerald-100 outline-none" />
                 </div>
             </main>
         </div>

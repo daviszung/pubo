@@ -1,4 +1,5 @@
 import * as elements from "typed-html";
+import { System } from "../System";
 
 export const systemEndpoints = {
     getWaypointsInSystem: async (systemID: string) => {
@@ -16,7 +17,8 @@ export const systemEndpoints = {
 		const responseBody = await response.json();
         console.log(responseBody);
 
-		return <div>work in progress</div>
+
+		return <System data={responseBody.data}/> 
 	} catch (err) {
 		console.log("error: ", err);
 		return 
