@@ -59,11 +59,15 @@ export function Waypoint({waypoint}: {waypoint: WaypointType}) {
                     {waypoint.traits.map((trait, index) => {
                         if (trait.symbol === "MARKETPLACE") {
                             return (
-                                <li class="cursor-pointer text-amber-300">MARKETPLACE</li>
+                                <div>
+                                    <button class="cursor-pointer text-amber-300">MARKETPLACE</button>
+                                </div>
                             )
                         } else if (trait.symbol === "SHIPYARD") {
                             return (
-                                <li hx-get={`/shipyard?system=${waypoint.systemSymbol}&waypoint=${waypoint.symbol}`} class=" cursor-pointer text-sky-500">SHIPYARD</li>
+                                <div>
+                                    <button hx-get={`/shipyard?system=${waypoint.systemSymbol}&waypoint=${waypoint.symbol}`} hx-target="#systemMain" class="cursor-pointer text-sky-500">SHIPYARD</button>
+                                </div>
                             )
                         }
                         return (

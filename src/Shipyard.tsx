@@ -1,9 +1,31 @@
+import { ShipType } from "./spaceAPI/ships"
+import { Ship } from "./Ship"
 
-export function Shipyard(){
+type ShipKind = {
+    type: string
+}
+
+type Transaction = {
+    waypointSymbol: string
+    shipSymbol: string
+    price: number
+    agentSymbol: string
+    timestamp: Date
+}
+
+type ShipyardData = {
+    symbol: string
+    shipTypes: Array<ShipKind>
+    transactions: Array<Transaction>
+    ships: Array<ShipType>
+    modificationsFee: number
+}
+
+export function Shipyard({ data }: { data: ShipyardData} ){
   
   return (
-    <div>
-      
-    </div>
+    <>
+        :3
+    </>
   )
 };

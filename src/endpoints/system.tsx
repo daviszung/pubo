@@ -1,3 +1,4 @@
+import { Shipyard } from "../Shipyard";
 import { System } from "../System";
 
 export const systemEndpoints = {
@@ -36,9 +37,7 @@ export const systemEndpoints = {
 
 			const responseBody = await response.json();
 
-			console.log("shipyard", responseBody);
-
-			return 
+			return <Shipyard data={responseBody}/>
 		} catch (err) {
 			console.log("error: ", err);
 			return;
