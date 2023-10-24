@@ -1,5 +1,3 @@
-import * as elements from "typed-html";
-
 type NavbarProps = {
     current: string;
 };

@@ -1,4 +1,3 @@
-import * as elements from "typed-html";
 import { Elysia, t } from "elysia";
 import { html } from "@elysiajs/html";
 
@@ -10,11 +9,10 @@ import { acceptContract } from "./spaceAPI/contracts";
 import { dashboardEndpoints } from "./endpoints/dashboard";
 import { shipEndpoints } from "./endpoints/ships";
 import { systemEndpoints } from "./endpoints/system";
-import { string } from "zod";
 
 const htmlScripts = fs.readFileSync("scripts.html").toString()
 
-const BaseHTML = ({ children }: elements.Children) => `
+const BaseHTML = ({ children }: any) => `
 <!DOCTYPE html>
 <html lang="en">
 

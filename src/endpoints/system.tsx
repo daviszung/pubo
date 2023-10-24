@@ -1,4 +1,3 @@
-import * as elements from "typed-html";
 import { System } from "../System";
 
 export const systemEndpoints = {
@@ -39,7 +38,7 @@ export const systemEndpoints = {
 
 			console.log("shipyard", responseBody);
 
-			return <div>:3</div>
+			return 
 		} catch (err) {
 			console.log("error: ", err);
 			return;

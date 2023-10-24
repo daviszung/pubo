@@ -1,4 +1,3 @@
-import * as elements from "typed-html";
 import { Navbar } from "../Navbar";
 import { DataList } from "../DataList";
 import { Contract } from "../Contract";

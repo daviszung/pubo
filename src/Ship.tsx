@@ -1,4 +1,3 @@
-import * as elements from "typed-html";
 import { ShipType } from "./spaceAPI/ships";
 import { DataList } from "./DataList";
 import { shipEndpoints } from "./endpoints/ships";

@@ -1,4 +1,3 @@
-import * as elements from "typed-html";
 import { Contract } from "./spaceAPI/contracts";
 
 type ContractProps = {

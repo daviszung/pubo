@@ -1,5 +1,3 @@
-import * as elements from "typed-html"
-
 const shadowColors = {
     "PLANET": "shadow-blue-500",
     "GAS_GIANT": "shadow-rose-700",

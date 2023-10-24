@@ -1,5 +1,3 @@
-import * as elements from "typed-html";
-
 import { getShips } from "../spaceAPI/ships";
 import { Menu, Ship } from "../Ship";
 

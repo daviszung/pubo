@@ -1,4 +1,3 @@
-import * as elements from "typed-html"
 import { Waypoint, WaypointType } from "./Waypoint"
 
 

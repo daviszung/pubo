@@ -1,5 +1,3 @@
-import * as elements from "typed-html"
-
 type DataListProps = {
     labels: string[];
     data: (string | number)[];
