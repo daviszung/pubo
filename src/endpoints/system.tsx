@@ -42,5 +42,32 @@ export const systemEndpoints = {
 			console.log("error: ", err);
 			return;
 		}
-	}
+	},
+
+	purchaseShip: async (shipType: string, waypointSymbol: string) => {
+		try {
+			const response = await fetch(
+				`https://api.spacetraders.io/v2/my/ships`,
+				{
+					method: "POST",
+					headers: {
+						"content-type": "application/json",
+						Authorization: "Bearer " + process.env.TOKEN,
+					},
+					body: JSON.stringify({
+						shipType: shipType,
+						waypointSymbol: waypointSymbol
+					})
+				}
+			);
+
+			const responseBody = await response.json();
+			console.log(responseBody);
+
+			return <div>Complete</div>
+		} catch (err) {
+			console.log("error: ", err);
+			return;
+		}
+	},
 };

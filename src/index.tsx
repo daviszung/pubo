@@ -69,14 +69,24 @@ const app = new Elysia()
 			symbol: t.String()
 		})
 	})
-	.get("/shipyard", async ({ query }) => {
-		return await systemEndpoints["getShipyard"](query.system, query.waypoint)
-	}, {
-		query: t.Object({
-			system: t.String(),
-			waypoint: t.String()
+	.group("/shipyard", app => app
+		.get("", async ({ query }) => {
+			return await systemEndpoints["getShipyard"](query.system, query.waypoint);
+		}, {
+			query: t.Object({
+				system: t.String(),
+				waypoint: t.String()
+			})
 		})
-	})
+		.post("/purchase", async ({ query }) => {
+			return await systemEndpoints["purchaseShip"](query.shipType, query.waypointSymbol)
+		}, {
+			query: t.Object({
+				shipType: t.String(),
+				waypointSymbol: t.String()
+			})
+		})
+	)
 	.get("/*", () => "404")
 	.listen(3000);
 

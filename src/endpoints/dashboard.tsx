@@ -18,7 +18,7 @@ export const dashboardEndpoints = {
         return (<div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="agent" />
             <main class="px-8 xl:px-32 py-10">
-                <DataList labels={["SYMBOL", "HQ", "CREDITS", "FACTION"]} data={[agent.symbol, agent.headquarters, agent.credits, agent.startingFaction]} />
+                <DataList labels={["SYMBOL", "HQ", "CREDITS", "FACTION"]} data={[agent.symbol, agent.headquarters, agent.credits.toLocaleString(), agent.startingFaction]} />
             </main>
         </div>);
     },
