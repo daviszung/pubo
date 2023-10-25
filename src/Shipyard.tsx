@@ -39,28 +39,28 @@ export function Shipyard({ data }: { data: ShipyardData} ){
   return (
         <>
           <section>
-            <h2>AVAILABLE SHIP TYPES</h2>
+            <h2 class="font-bold text-2xl text-amber-400 my-4">AVAILABLE SHIP TYPES</h2>
               {data.shipTypes.map((item) => {
                   return (
-                      <div class="text-emerald-600">
+                      <div class="text-emerald-100 font-semibold">
                           {item.type}
                       </div>
                   );
               })}
           </section>
           <section>
-            <h3>MODIFICATION FEE</h3>
-            <p>{data.modificationsFee}</p>
+            <h3 class="font-bold text-2xl text-amber-400 my-4">MODIFICATION FEE</h3>
+            <p class="text-amber-300 font-semibold">{data.modificationsFee} CREDITS</p>
           </section>
           <section>
-            <h2>SHIPS</h2>
+            <h2 class="font-bold text-2xl text-amber-400 my-4">SHIPS</h2>
             {data.ships.map((item) => {
                 return (
-                    <article>
-                        <div>{item.name}</div>
-                        <div>{item.type}</div>
+                    <article class="text-emerald-100 py-4">
+                        <div class="text-emerald-600 font-bold">{item.name.toUpperCase()}</div>
+                        <div class="font-semibold">{item.type}</div>
                         <div>{item.description}</div>
-                        <div>{item.purchasePrice}</div>
+                        <div class="text-amber-300 font-semibold">{item.purchasePrice.toLocaleString()} CREDITS</div>
                     </article>
                 )
             })}
