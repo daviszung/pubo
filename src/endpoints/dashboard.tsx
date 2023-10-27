@@ -2,7 +2,7 @@ import { Navbar } from "../Navbar";
 import { DataList } from "../DataList";
 import { Contract } from "../Contract";
 
-import { getAgentDetails } from "../spaceAPI/agent";
+import { getAgentDetails, AgentDetailsSchemaType } from "../spaceAPI/agent";
 import { getMyContracts } from "../spaceAPI/contracts";
 import { getShips } from "../spaceAPI/ships";
 
@@ -11,14 +11,14 @@ import { Ship } from "../Ship";
 export const dashboardEndpoints = {
     agent: async () => {
 
-        const agent = await getAgentDetails();
+        const agent: AgentDetailsSchemaType = await getAgentDetails();
         if (!agent) {
             return <div>agent error lol</div>;
         }
         return (<div class="min-h-screen bg-slate-900 text-white">
             <Navbar current="agent" />
             <main class="px-8 xl:px-32 py-10">
-                <DataList labels={["SYMBOL", "HQ", "CREDITS", "FACTION"]} data={[agent.symbol, agent.headquarters, agent.credits.toLocaleString(), agent.startingFaction]} />
+                <DataList labels={["SYMBOL", "HQ", "CREDITS", "FACTION", "SHIP COUNT"]} data={[agent.symbol, agent.headquarters, agent.credits.toLocaleString(), agent.startingFaction, agent.shipCount]} />
             </main>
         </div>);
     },

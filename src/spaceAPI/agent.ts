@@ -1,14 +1,18 @@
+import { z } from "zod"
 import { headersConfig } from "../misc/config";
 
-type AgentDetails = {
-	accountId: string;
-	symbol: string;
-	headquarters: string;
-	credits: number;
-	startingFaction: string;
-};
+const AgentDetailsSchema = z.object({
+	accountId: z.string(),
+	symbol: z.string(),
+	headquarters: z.string(),
+	credits: z.number(),
+	startingFaction: z.string(),
+	shipCount: z.number().int()
+});
 
-let agentCache: AgentDetails | null = null;
+export type AgentDetailsSchemaType = z.infer<typeof AgentDetailsSchema>;
+
+let agentCache: AgentDetailsSchemaType | null = null;
 
 export async function getAgentDetails(useCache: boolean = true) {
 	if (agentCache && useCache) {
@@ -24,13 +28,15 @@ export async function getAgentDetails(useCache: boolean = true) {
 			headers: headersConfig
 		});
 
-		const detailsBody: { data: AgentDetails } = await details.json();
+		const detailsBody = await details.json();
+
+		AgentDetailsSchema.parse(detailsBody.data)
 
 		agentCache = detailsBody.data;
 
 		return detailsBody.data;
 	} catch (err) {
 		console.log("error: ", err);
+		return
 	}
-	return;
 }
