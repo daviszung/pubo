@@ -1,3 +1,5 @@
+import { headersConfig } from "../misc/config";
+
 type AgentDetails = {
 	accountId: string;
 	symbol: string;
@@ -19,10 +21,7 @@ export async function getAgentDetails(useCache: boolean = true) {
 
 	try {
 		const details = await fetch("https://api.spacetraders.io/v2/my/agent", {
-			headers: {
-				"content-type": "application/json",
-				Authorization: "Bearer " + process.env.TOKEN,
-			},
+			headers: headersConfig
 		});
 
 		const detailsBody: { data: AgentDetails } = await details.json();

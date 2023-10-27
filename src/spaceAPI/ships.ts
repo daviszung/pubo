@@ -1,3 +1,5 @@
+import { headersConfig } from "../misc/config";
+
 let shipsCache: ShipType[] | null = null;
 
 export async function getShips(useCache: boolean = true) {
@@ -10,10 +12,7 @@ export async function getShips(useCache: boolean = true) {
 
 	try {
 		const response = await fetch("https://api.spacetraders.io/v2/my/ships", {
-			headers: {
-				"content-type": "application/json",
-				Authorization: "Bearer " + process.env.TOKEN,
-			},
+            headers: headersConfig
 		});
 
 		const body: {data: ShipType[]} = await response.json();

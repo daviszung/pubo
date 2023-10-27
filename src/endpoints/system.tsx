@@ -1,3 +1,4 @@
+import { headersConfig } from "../misc/config";
 import { Shipyard } from "../Shipyard";
 import { System } from "../System";
 
@@ -7,10 +8,7 @@ export const systemEndpoints = {
 			const response = await fetch(
 				`https://api.spacetraders.io/v2/systems/${systemID}/waypoints`,
 				{
-					headers: {
-						"content-type": "application/json",
-						Authorization: "Bearer " + process.env.TOKEN,
-					},
+					headers: headersConfig
 				}
 			);
 
@@ -28,10 +26,7 @@ export const systemEndpoints = {
 			const response = await fetch(
 				`https://api.spacetraders.io/v2/systems/${systemID}/waypoints/${waypointID}/shipyard`,
 				{
-					headers: {
-						"content-type": "application/json",
-						Authorization: "Bearer " + process.env.TOKEN,
-					},
+					headers: headersConfig
 				}
 			);
 
@@ -50,10 +45,7 @@ export const systemEndpoints = {
 				`https://api.spacetraders.io/v2/my/ships`,
 				{
 					method: "POST",
-					headers: {
-						"content-type": "application/json",
-						Authorization: "Bearer " + process.env.TOKEN,
-					},
+					headers: headersConfig,
 					body: JSON.stringify({
 						shipType: shipType,
 						waypointSymbol: waypointSymbol

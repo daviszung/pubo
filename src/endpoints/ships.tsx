@@ -1,3 +1,4 @@
+import { headersConfig } from "../misc/config";
 import { getShips } from "../spaceAPI/ships";
 import { Menu, Ship } from "../Ship";
 
@@ -28,10 +29,7 @@ export const shipEndpoints = {
         try {
             const response = await fetch(`https://api.spacetraders.io/v2/my/ships/${shipSymbol}/orbit`, {
                 method: "POST",
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: "Bearer " + process.env.TOKEN,
-                },
+                headers: headersConfig
             });
 
             const responseBody = await response.json();

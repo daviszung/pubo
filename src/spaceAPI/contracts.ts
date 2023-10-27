@@ -1,9 +1,4 @@
-const options = {
-	headers: {
-		"content-type": "application/json",
-		Authorization: "Bearer " + process.env.TOKEN,
-	},
-};
+import { headersConfig } from "../misc/config";
 
 export type Contract = {
     id: string
@@ -38,9 +33,9 @@ export async function getMyContracts(useCache: boolean = true) {
 
 	try {
 		const details = await fetch(
-			"https://api.spacetraders.io/v2/my/contracts",
-			options
-		);
+			"https://api.spacetraders.io/v2/my/contracts", {
+			headers: headersConfig
+		});
 
 		const detailsBody: ContractsData = await details.json();
 
@@ -61,20 +56,17 @@ export async function acceptContract(contractID: string) {
 			`https://api.spacetraders.io/v2/my/contracts/${contractID}/accept`,
 			{
 				method: "POST",
-				headers: {
-					"content-type": "application/json",
-					Authorization: "Bearer " + process.env.TOKEN,
-				},
+				headers: headersConfig
 			}
 		);
 
 		const responseBody = await response.json();
 
-		contractsCache = null
+		contractsCache = null;
 
 		console.log(responseBody);
 		return responseBody;
-		
+
 	} catch (err) {
 		console.log("error: ", err);
 	}
