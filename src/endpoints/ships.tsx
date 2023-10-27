@@ -20,10 +20,32 @@ export const shipEndpoints = {
             console.log("error with change ship menu", err);
         }
         
-
-
         return (
             <div>500 server error</div>
         );
     },
+    orbit: async (shipSymbol: string) => {
+        try {
+            const response = await fetch(`https://api.spacetraders.io/v2/my/ships/${shipSymbol}/orbit`, {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: "Bearer " + process.env.TOKEN,
+                },
+            });
+
+            const responseBody = await response.json();
+            console.log("orbit", responseBody);
+            return (
+                <button class="cursor-pointer">
+                    {responseBody.data.nav.status}
+                </button>
+            )
+
+        } catch (error) {
+            console.error("error: ", error);
+        }
+
+    }
+
 };

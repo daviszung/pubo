@@ -1,4 +1,3 @@
-
 let shipsCache: ShipType[] | null = null;
 
 export async function getShips(useCache: boolean = true) {
@@ -50,8 +49,8 @@ type Route = {
         x: number,
         y: number;
     },
-    departureTime: string
-    arrival: string
+    departureTime: string;
+    arrival: string;
 };
 
 export type Crew = {
@@ -140,20 +139,20 @@ type Registration = {
     name: string;
     factionSymbol: string;
     role: string;
-}
+};
 
 type Item = {
-    symbol: string
-    name: string
-    description: string
-    units: number
-}
+    symbol: string;
+    name: string;
+    description: string;
+    units: number;
+};
 
 type Cargo = {
     capacity: number;
     units: number;
-    inventory: Item[]
-}
+    inventory: Item[];
+};
 
 export type ShipType = {
     symbol: string,
@@ -171,6 +170,6 @@ export type ShipType = {
     engine: Engine;
     modules: Module[];
     mounts: Mount[];
-    registration: Registration
-    cargo: Cargo
+    registration: Registration;
+    cargo: Cargo;
 };

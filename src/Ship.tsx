@@ -27,15 +27,6 @@ export function Ship({ ship, menu }: ShipProps) {
     const destination = ship.nav.route.destination;
     const departure = ship.nav.route.departure;
 
-    ship.cargo.inventory = [
-        {
-            symbol: 's',
-            name: 's',
-            description: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-            units: 900
-        }
-    ]
-
     const menus = {
         registration: (
             <div>
@@ -60,7 +51,22 @@ export function Ship({ ship, menu }: ShipProps) {
             <div class="flex">
                 <section class="mr-10">
                     <h3 class="font-bold text-2xl text-amber-400 mb-4">NAVIGATION</h3>
-                    <DataList labels={navLabels} data={[ship.nav.waypointSymbol, ship.nav.status, ship.nav.flightMode, dateStringToLocale(ship.nav.route.departureTime), dateStringToLocale(ship.nav.route.arrival)]} />
+                    <div class="flex">
+                        <ul class="font-semibold text-lg gap-2 mr-8">
+                            {navLabels.map((label, index) =>
+                                <li>{label.toUpperCase()}</li>
+                            )}
+                        </ul>
+                        <ul class="font-semibold text-lg gap-2 italic text-emerald-600 whitespace-nowrap">
+                            {[ship.nav.waypointSymbol, ship.nav.status, ship.nav.flightMode, dateStringToLocale(ship.nav.route.departureTime), dateStringToLocale(ship.nav.route.arrival)].map((data, index) => {
+                                if (data === "DOCKED") {
+                                    return <button hx-post={`/ships/orbit?shipSymbol=${ship.symbol}`} class="cursor-pointer">{data}</button>
+                                }
+
+                                return <li>{data}</li>
+                            })}
+                        </ul>
+                    </div>
                 </section>
                 <section class="mr-10">
                     <h3 class="font-bold text-2xl text-amber-400 mb-4">DESTINATION</h3>
@@ -129,10 +135,10 @@ export function Ship({ ship, menu }: ShipProps) {
         <div id={ship.symbol} class="min-w-[50%] w-fit flex flex-col justify-between border border-emerald-500 rounded bg-slate-800 text-emerald-100 p-6 shadow-md shadow-emerald-900">
             {menus[menu]}
             <div id="hotbar" class="mt-4 flex items-center gap-6">
-                <i hx-get={`/ships?symbol=${ship.symbol}&menu=registration`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "registration" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-rocket cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></i>
-                <i hx-get={`/ships?symbol=${ship.symbol}&menu=nav`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "nav" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-location-crosshairs cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></i>
-                <i hx-get={`/ships?symbol=${ship.symbol}&menu=tech`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "tech" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-wrench cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></i>
-                <i hx-get={`/ships?symbol=${ship.symbol}&menu=cargo`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "cargo" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-cubes cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></i>
+                <button hx-get={`/ships?symbol=${ship.symbol}&menu=registration`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "registration" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-rocket cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></button>
+                <button hx-get={`/ships?symbol=${ship.symbol}&menu=nav`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "nav" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-location-crosshairs cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></button>
+                <button hx-get={`/ships?symbol=${ship.symbol}&menu=tech`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "tech" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-wrench cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></button>
+                <button hx-get={`/ships?symbol=${ship.symbol}&menu=cargo`} hx-target={`#${ship.symbol}`} hx-swap="outerHTML" class={`${menu === "cargo" ? "border-amber-300" : "border-emerald-500"} fa-solid fa-cubes cursor-pointer bg-slate-700  border p-2 rounded scale-125`}></button>
             </div>
         </div>
     );

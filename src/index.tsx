@@ -46,14 +46,24 @@ const app = new Elysia()
 		.get("/navigation", dashboardEndpoints["navigation"])
 		.get("/system", dashboardEndpoints["system"])
 	)
-	.get("/ships", async ({ query }) => {
-		return await shipEndpoints["changeMenu"](query.symbol, query.menu);
-	}, {
-		query: t.Object({
-			symbol: t.String(),
-			menu: t.Union([t.Literal("registration"), t.Literal("nav"), t.Literal("tech"), t.Literal("cargo")])
+	.group("/ships", app => app
+		.get("", async ({ query }) => {
+			return await shipEndpoints["changeMenu"](query.symbol, query.menu);
+		}, {
+			query: t.Object({
+				symbol: t.String(),
+				menu: t.Union([t.Literal("registration"), t.Literal("nav"), t.Literal("tech"), t.Literal("cargo")])
+			})
 		})
-	})
+		.post("/orbit", async ({ query }) => {
+			console.log("here", query);
+			return await shipEndpoints["orbit"](query.shipSymbol);
+		}, {
+			query: t.Object({
+				shipSymbol: t.String()
+			})
+		})
+	)
 	.post("/contracts/accept/:id", async ({ params }) => {
 		const status = await acceptContract(params.id);
 		return;
@@ -79,7 +89,7 @@ const app = new Elysia()
 			})
 		})
 		.post("/purchase", async ({ query }) => {
-			return await systemEndpoints["purchaseShip"](query.shipType, query.waypointSymbol)
+			return await systemEndpoints["purchaseShip"](query.shipType, query.waypointSymbol);
 		}, {
 			query: t.Object({
 				shipType: t.String(),
